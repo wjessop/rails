@@ -38,6 +38,7 @@ module ActiveSupport
 
       def before_setup # :nodoc:
         super
+        GC.start # Hack to get round the issue of recycled FDs - https://github.com/rails/rails/commit/71ffd9b521685cefd64f53eba989012701cef590
         run_callbacks :setup
       end
 
