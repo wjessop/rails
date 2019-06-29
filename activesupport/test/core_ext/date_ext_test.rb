@@ -69,7 +69,16 @@ class DateExtCalculationsTest < ActiveSupport::TestCase
   end
 
   def test_compare_to_time
-    assert Date.yesterday < Time.now
+    assert Date.today == Time.now
+  end
+
+  def test_compare_date_to_time_on_the_same_day
+    # Time.use_zone('London') do
+      current_time = Time.parse('Tue, 11 Jun 2019 00:30:00 BST +01:00')
+      assert_equal false, current_time.to_date < current_time
+      assert_equal true, current_time.to_date == current_time
+      assert_equal false, current_time.to_date > current_time
+    # end
   end
 
   def test_to_datetime
